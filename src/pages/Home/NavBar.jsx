@@ -1,17 +1,32 @@
 import { Link } from "react-router-dom";
 import NavBarDrawer from "./NavBarDrawer";
+import { useEffect, useState } from "react";
 
 
 
 const NavBar = () => {
+    const [bg, setBg] = useState(false)
     const navLinks = <>
-        <a href="#why-us"><li className="hover:text-[#FAAF40]">Why us?</li></a>
-        <a href="#how-it-works"><li className="hover:text-[#FAAF40]">How it works</li></a>
-        <a href="#about-us"><li className="hover:text-[#FAAF40]">About us</li></a>
-        <a href="#blog"><li className="hover:text-[#FAAF40]">Blog</li></a>
+        <a href="#why-us"><li className={`${bg ? 'hover:text-[#FAAF40]' : 'hover:underline'}`}>Why us?</li></a>
+        <a href="#how-it-works"><li className={`${bg ? 'hover:text-[#FAAF40]' : 'hover:underline'}`}>How it works</li></a>
+        <a href="#about-us"><li className={`${bg ? 'hover:text-[#FAAF40]' : 'hover:underline'}`}>About us</li></a>
+        <a href="#blog"><li className="hover:text-[#FAAF40] text-black">Blog</li></a>
     </>
+
+    useEffect(() =>{
+        window.onscroll = () => {
+            console.log(window.pageYOffset);
+            if(window.pageYOffset > 200){
+                setBg(true)
+            }
+            else{
+                setBg(false)
+            }
+        }
+    },[])
     return (
-        <div className="py-5 bg-[#FFF] shadow-lg fixed w-screen">
+        <div
+        className={`py-5 z-20  fixed w-screen ${bg ? 'bg-[#FFF] shadow-xl' : 'text-white'}`}>
             <nav className="flex items-center justify-between px-5 md:px-8 lg:px-0 lg:w-[calc(100%-150px)] mx-auto">
                 {/* logo */}
                 <div className="text-xl font-bold lg:w-4/5">LOGO</div>
